@@ -4,29 +4,27 @@
   <title>Stand coiffure de la Gymnaz'In&trade;</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="libs/bootstrap.min.css">
+  <script src="libs/jquery.min.js"></script>
+  <script src="libs/bootstrap.min.js"></script>
   <style type="text/css">
     body{
       font-family: "Comic Sans MS", "Comic Sans", cursive;
-      color: blue;
-      //background-image: url("new.gif");
-      background-color: black;
+      color: red;
+      background-image: url("new.gif");
       background-size: 384px 200px;
     }
   </style>
 </head>
-<body onload="randomCut()">
+<body>
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h1 class="text-center" style="background-color: black">
+        <h1 class="text-center" style="background-color: white; font-size:80px;">
           Nos coupes disponibles!!!
-          
         </h1>
-        <div class="text-center" style="margin: 30px;font-size: 30px;"><button  onclick="randomCut();">Coupe aléatoire!</button></div>
+        <div class="text-center" style="margin: 30px;font-size: 80px;"><button onclick="randomCut();">Coupe aléatoire!</button></div>
       </div>
     </div>
     <div class="row" style="margin-top: 30px;">
@@ -37,7 +35,7 @@
 
             <script type="text/javascript">
 
-              var nImages = 10;
+              var nImages = 9;
 
               for(var i=1; i<=nImages; i++){
                 document.write("<li data-target='#myCarousel' data-slide-to='"+i+"'></li>");
@@ -50,7 +48,9 @@
           <div class="carousel-inner">
             <script type="text/javascript">
               for(var i=1; i<=nImages; i++){
-                document.write("<div class='item'><img src='images/coupe_"+i+".jpg' style='width:100%;'></div>");
+                var active = "";
+                if(i == 1) active = "active";
+                document.write("<div class='item "+active+"'><img src='images/coupe_"+i+".png' style='width:100%;'></div>");
               }
             </script>
           </div>
@@ -69,15 +69,23 @@
 
   <script type="text/javascript">
     $('.carousel').carousel({
-      interval: 6000,
+      interval: 4000,
       pause: "false"
     });
 
     var $item = $('.carousel .item');
-    var $numberofSlides = $('.item').length;
     function randomCut(){
-      var $currentSlide = Math.floor((Math.random() * $numberofSlides));
+
+      $('.carousel').carousel({
+        pause: "true"
+      });
+
+      var $currentSlide = Math.floor((Math.random() * nImages)+1);
+      if($currentSlide == nImages) $currentSlide--; //ugly bug fix
+      console.log($currentSlide);
+
       $('.carousel-indicators li').each(function(){
+
         var $slideValue = $(this).attr('data-slide-to');
         if($currentSlide == $slideValue) {
           $(this).addClass('active');
@@ -86,6 +94,7 @@
           $(this).removeClass('active');
           $item.eq($slideValue).removeClass('active');
         }
+
       });
     }
   </script>
