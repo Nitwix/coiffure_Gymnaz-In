@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Stand coiffure de la Gymnaz'In&trade;</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body{
+      font-family: "Comic Sans MS", "Comic Sans", cursive;
+      color: blue;
+      //background-image: url("new.gif");
+      background-color: black;
+      background-size: 384px 200px;
+    }
+  </style>
+</head>
+<body onload="randomCut()">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="text-center" style="background-color: black">
+          Nos coupes disponibles!!!
+          
+        </h1>
+        <div class="text-center" style="margin: 30px;font-size: 30px;"><button  onclick="randomCut();">Coupe aléatoire!</button></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+
+            <script type="text/javascript">
+
+              var nImages = 10;
+
+              for(var i=1; i<=nImages; i++){
+                document.write("<li data-target='#myCarousel' data-slide-to='"+i+"'></li>");
+              }
+            </script>
+
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <script type="text/javascript">
+              for(var i=1; i<=nImages; i++){
+                document.write("<div class='item'><img src='images/coupe_"+i+".jpg' style='width:100%;'></div>");
+              }
+            </script>
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $('.carousel').carousel({
+      interval: 6000,
+      pause: "false"
+    });
+
+    var $item = $('.carousel .item');
+    var $numberofSlides = $('.item').length;
+    function randomCut(){
+      var $currentSlide = Math.floor((Math.random() * $numberofSlides));
+      $('.carousel-indicators li').each(function(){
+        var $slideValue = $(this).attr('data-slide-to');
+        if($currentSlide == $slideValue) {
+          $(this).addClass('active');
+          $item.eq($slideValue).addClass('active');
+        } else {
+          $(this).removeClass('active');
+          $item.eq($slideValue).removeClass('active');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
